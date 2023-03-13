@@ -37,6 +37,8 @@ const questions = [
             new inquirer.Separator(),
             "AGPL",
             new inquirer.Separator(),
+            "No License Used",
+            new inquirer.Separator(),
          ],
     },
     {
