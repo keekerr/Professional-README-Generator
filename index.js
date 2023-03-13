@@ -1,12 +1,9 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const path = require("path");
 const generateMarkdown = require('./utils/generateMarkdown');
 
-// TODO: Create an array of questions for user input
-// Look into how to populate badges here
-// edit the license seciton to be a list of potions
-// also need to make some options required and other optional
 const questions = [
     {
         type: "input",
@@ -29,9 +26,18 @@ const questions = [
         message: "Enter instruction on how to test your Project.",
     },
     { 
-        type: "input",
+        type: "list",
         name: "Licenses used for Project",
         message: "Enter any Licenses used in project",
+        choices: [
+            new inquirer.Separator(),
+            "MIT",
+            new inquirer.Separator(),
+            "gplV3",
+            new inquirer.Separator(),
+            "AGPL",
+            new inquirer.Separator(),
+         ],
     },
     {
         type: "input",
@@ -50,20 +56,24 @@ const questions = [
     }
 ];
 
-// Somethings is wrong here. Need to edit code.
 // TODO: Create a function to write README file
+// source: https://stackoverflow.com/questions/2496710/writing-to-files-in-node-js
+// source: https://www.geeksforgeeks.org/node-js-path-join-method/
 function writeToFile(fileName, data) {
     return fs.writeFileSync(path.join(process.cwd(), fileName), data);
-}
+  };
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.createPromptModule(questions).then((answers) => {
-        writeToFile("Generated_ReadMe.md", generateMarkdown({
-            ...answers,
-        }));
+    inquirer.prompt(questions).then((answers) => {
+      writeToFile(
+        "Example_ReadMe.md",
+        generateMarkdown({
+          ...answers,
+        })
+      );
     });
-}
+  }
 
 // Function call to initialize app
 init();
