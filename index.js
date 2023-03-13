@@ -1,9 +1,12 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const fs = require('fs')
+const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 // Look into how to populate badges here
+// edit the license seciton to be a list of potions
+// also need to make some options required and other optional
 const questions = [
     {
         type: "input",
@@ -47,6 +50,7 @@ const questions = [
     }
 ];
 
+// Somethings is wrong here. Need to edit code.
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     return fs.writeFileSync(path.join(process.cwd(), fileName), data);
